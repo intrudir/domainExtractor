@@ -50,3 +50,20 @@ python3 domainExtractor.py --file test.html --target all
 
 ![image](https://user-images.githubusercontent.com/24526564/85907449-81b60080-b7df-11ea-9c10-d389b3558605.png)
 
+<h1>Domains not previously found</h1>
+If you run the script again while checking for the same target, a few things occur: 
+<br>1) if you already have a final file for it it will notify you of domains you didnt have before
+<br>2) It will append them to the final file
+<br>3) It will also create a new file with the date and log them in there with the time.
+
+<br>This allows you to check the same target across multiple files and be notified of any new domains found!
+
+<h3>Example: extracting from Amass and Assetfinder outputfiles</h3>
+
+![image](https://user-images.githubusercontent.com/24526564/85907726-7f07db00-b7e0-11ea-820f-8912d779c065.png)
+
+I first use it against my Amass results, then against my Assetfinder results. 
+<br>The script will sort and dedup as well as notify me of how many new, unique domains came from assetfinder's results.
+
+![image](https://user-images.githubusercontent.com/24526564/85907755-9777f580-b7e0-11ea-9a87-ee5ae4d157dd.png)
+
