@@ -48,7 +48,7 @@ def extractDomains(inputFile):
 					domains.append(j)
 				elif j.find('.io') != -1:
 					domains.append(j)
-	print("File: {} has {} domains.".format(inputFile, len(initDomains)))
+	print("File: {} has {} possible domains...".format(inputFile, len(initDomains)))
 
 	return domains
 
