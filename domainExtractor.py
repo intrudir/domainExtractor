@@ -85,7 +85,7 @@ else:
 				out.write("{}\n".format(i))
 	
 	if newDomains:			
-		print("{} new domains were found".format(len(newDomains)))
+		print("{} new domains were found and added to {}".format(len(newDomains), outputFile))
 
 		with open(newHostsFile, 'a') as nhf:
 			for i in newDomains:
