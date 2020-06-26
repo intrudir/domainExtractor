@@ -30,7 +30,7 @@ def extractDomains(inputFile):
 		initDomains = f.read().splitlines()
 	
 	for i in initDomains:
-		matches = re.findall(r'(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}', urllib.parse.unquote(i))
+		matches = re.findall(r'(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}', urllib.parse.unquote(urllib.parse.unquote(i)))
 		if not args.target.lower() == 'all':
 			for j in matches:
 			
