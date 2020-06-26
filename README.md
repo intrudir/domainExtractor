@@ -58,12 +58,17 @@ If you run the script again while checking for the same target, a few things occ
 
 <br>This allows you to check the same target across multiple files and be notified of any new domains found!
 
-<h3>Example: extracting from Amass and Assetfinder outputfiles</h3>
+<h3>Example: extracting from Amass and Assetfinder output files</h3>
 
 ![image](https://user-images.githubusercontent.com/24526564/85907726-7f07db00-b7e0-11ea-820f-8912d779c065.png)
 
 I first use it against my Amass results, then against my Assetfinder results. 
 <br>The script will sort and dedup as well as notify me of how many new, unique domains came from assetfinder's results.
 
-![image](https://user-images.githubusercontent.com/24526564/85907755-9777f580-b7e0-11ea-9a87-ee5ae4d157dd.png)
+![image](https://user-images.githubusercontent.com/24526564/85907913-27b63a80-b7e1-11ea-8d8b-c887a19d61ca.png)
+
+It will add them to the final file as well as log just the new ones to a file with the date and time.
+
+![image](https://user-images.githubusercontent.com/24526564/85908016-706df380-b7e1-11ea-8986-fe96181c6b6d.png)
+
 
