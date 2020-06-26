@@ -46,8 +46,7 @@ python3 domainExtractor.py --file test.html --target all
 
 ![image](https://user-images.githubusercontent.com/24526564/85906901-c50f6f80-b7dd-11ea-8fea-e7adad964d97.png)
 
+<h3>Example output:</h3>
 
-
-
-
+![image](https://user-images.githubusercontent.com/24526564/85907449-81b60080-b7df-11ea-9c10-d389b3558605.png)
 
