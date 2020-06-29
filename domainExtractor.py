@@ -6,6 +6,8 @@ description="This script will extract domains from the file you specify and add 
 )
 parser.add_argument('--file', action="store", default=None, dest='inputFile',
 	help="Specify the file to extract domains from")
+parser.add_argument('--url', action="store", default=None, dest='inputFile',
+	help="Specify the web page to extract domains from. One at a time for now")
 parser.add_argument('--target', action="store", default='all', dest='target',
 	help="Specify the target top-level domain you'd like to find and extract e.g. uber.com")
 parser.add_argument('--verbose', action="store_true", default=False, dest='verbose',
@@ -29,10 +31,8 @@ logger.setLevel(logging.INFO)
 fileList = args.inputFile.split(',')
 outputFile = "final.{}.txt".format(args.target)
 
-def extractDomains(inputFile):
+def extractDomains(args, inputFile, initDomains):
 	domains = []
-	with open(inputFile, 'r') as f:
-		initDomains = f.read().splitlines()
 	
 	if not args.target:
 		print("No target specified, defaulting to finding 'all' domains")
@@ -60,10 +60,17 @@ def extractDomains(inputFile):
 
 	return domains
 
-# sort and dedupe domains
+
 results = []
-for f in fileList:
-	results += extractDomains(f)
+for inputFile in fileList:
+	try:
+		with open(inputFile, 'r') as f:
+			initDomains = f.read().splitlines()
+	except UnicodeDecodeError:
+		with open(inputFile, 'r', encoding="ISO-8859-1") as f:
+			initDomains = f.read().splitlines()
+			
+	results += extractDomains(args, inputFile, initDomains)
 	
 finalDomains = sorted(set(results))
 
