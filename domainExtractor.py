@@ -1,5 +1,5 @@
 from datetime import date, datetime
-import re, sys, argparse, urllib.parse
+import os, re, sys, argparse, urllib.parse, logging
 
 parser = argparse.ArgumentParser(
 description="This script will extract domains from the file you specify and add it to a final file"
@@ -17,12 +17,18 @@ if not len(sys.argv) > 1:
 	print()
 	exit()
 
-today = date.today().strftime("%b-%d-%Y")
-now = datetime.now().strftime("%H:%M:%S")
+
+### Set the logger up
+if not os.path.exists('logs'):
+    os.makedirs('logs')
+logfileName = "logs/newdomains.{}.log".format(args.target)
+logging.basicConfig(filename=logfileName, filemode='a',
+format="%(asctime)s - %(levelname)s - %(message)s")
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
 
 fileList = args.inputFile.split(',')
 outputFile = "final.{}.txt".format(args.target)
-newHostsFile = "{}-{}.txt".format(today, args.target)
 
 def extractDomains(inputFile):
 	domains = []
@@ -86,10 +92,9 @@ else:
 	
 	if newDomains:			
 		print("{} new domains were found and added to {}".format(len(newDomains), outputFile))
-
-		with open(newHostsFile, 'a') as nhf:
-			for i in newDomains:
-				nhf.write("{}: {}\n".format(now, i))
+		for i in newDomains:
+			logger.info("New domain found: {}".format(i))
+			
 	else:
 		print("No new domains found.")
 		
