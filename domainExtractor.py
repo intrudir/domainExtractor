@@ -1,12 +1,12 @@
 from datetime import date, datetime
-import os, re, sys, argparse, urllib.parse, logging
+import os, re, sys, argparse, urllib.parse, logging, requests
 
 parser = argparse.ArgumentParser(
 description="This script will extract domains from the file you specify and add it to a final file"
 )
 parser.add_argument('--file', action="store", default=None, dest='inputFile',
 	help="Specify the file to extract domains from")
-parser.add_argument('--url', action="store", default=None, dest='inputFile',
+parser.add_argument('--url', action="store", default=None, dest='url',
 	help="Specify the web page to extract domains from. One at a time for now")
 parser.add_argument('--target', action="store", default='all', dest='target',
 	help="Specify the target top-level domain you'd like to find and extract e.g. uber.com")
@@ -28,16 +28,15 @@ format="%(asctime)s - %(levelname)s - %(message)s")
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-fileList = args.inputFile.split(',')
 outputFile = "final.{}.txt".format(args.target)
 
-def extractDomains(args, inputFile, initDomains):
+def extractDomains(args, inputFile, rawData):
 	domains = []
 	
 	if not args.target:
 		print("No target specified, defaulting to finding 'all' domains")
 	
-	for i in initDomains:
+	for i in rawData:
 		matches = re.findall(r'(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}', urllib.parse.unquote(urllib.parse.unquote(i)))
 		if not args.target.lower() == 'all':
 			for j in matches:
@@ -56,22 +55,34 @@ def extractDomains(args, inputFile, initDomains):
 					domains.append(j)
 				elif j.find('.io') != -1:
 					domains.append(j)
-	print("File: {} has {} possible domains...".format(inputFile, len(initDomains)))
+	print("File: {} has {} possible domains...".format(inputFile, len(rawData)))
 
 	return domains
 
 
 results = []
-for inputFile in fileList:
-	try:
-		with open(inputFile, 'r') as f:
-			initDomains = f.read().splitlines()
-	except UnicodeDecodeError:
-		with open(inputFile, 'r', encoding="ISO-8859-1") as f:
-			initDomains = f.read().splitlines()
-			
-	results += extractDomains(args, inputFile, initDomains)
+
+# If files are specified, check them
+if args.inputFile:
+	fileList = args.inputFile.split(',')
+	for inputFile in fileList:
+		try:
+			with open(inputFile, 'r') as f:
+				rawData = f.read().splitlines()
+		except UnicodeDecodeError:
+			with open(inputFile, 'r', encoding="ISO-8859-1") as f:
+				rawData = f.read().splitlines()
+				
+		results += extractDomains(args, inputFile, rawData)
 	
+# If a URL is specified, pull that	
+if args.url:
+	headers = {"User-Agent": "Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0"}
+	rawData = requests.get(args.url, headers=headers)
+	rawData = rawData.text.split('\n')
+	results += extractDomains(args, args.url, rawData)
+	
+# sort and dedupe our results
 finalDomains = sorted(set(results))
 
 # read all the domains we already have. 
