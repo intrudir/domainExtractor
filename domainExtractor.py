@@ -6,7 +6,7 @@ description="This script will extract domains from the file you specify and add 
 )
 parser.add_argument('--file', action="store", default=None, dest='inputFile',
 	help="Specify the file to extract domains from")
-parser.add_argument('--target', action="store", default=None, dest='target',
+parser.add_argument('--target', action="store", default='all', dest='target',
 	help="Specify the target top-level domain you'd like to find and extract e.g. uber.com")
 parser.add_argument('--verbose', action="store_true", default=False, dest='verbose',
 	help="Enable slightly more verbose console output")
@@ -16,7 +16,6 @@ if not len(sys.argv) > 1:
 	parser.print_help()
 	print()
 	exit()
-
 
 ### Set the logger up
 if not os.path.exists('logs'):
@@ -34,6 +33,9 @@ def extractDomains(inputFile):
 	domains = []
 	with open(inputFile, 'r') as f:
 		initDomains = f.read().splitlines()
+	
+	if not args.target:
+		print("No target specified, defaulting to finding 'all' domains")
 	
 	for i in initDomains:
 		matches = re.findall(r'(?:[a-zA-Z0-9](?:[a-zA-Z0-9\-]{,61}[a-zA-Z0-9])?\.)+[a-zA-Z]{2,6}', urllib.parse.unquote(urllib.parse.unquote(i)))
@@ -65,7 +67,6 @@ for f in fileList:
 	
 finalDomains = sorted(set(results))
 
-	
 # read all the domains we already have. 
 try:
 	with open(outputFile, 'r') as out:
@@ -81,7 +82,7 @@ except FileNotFoundError:
 			
 	print("{} domains written to output file {}".format(len(finalDomains), outputFile))
 
-# loop through fresh domains. If we don't already have it, add it to final file, notify us, add it to a seperate file for review.
+# loop through fresh domains. If we don't already have it, add it to final file, notify us, log it.
 else:
 	newDomains = []
 	with open(outputFile, 'a') as out:
