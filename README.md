@@ -68,7 +68,7 @@ You can either omit the --target flag completely, or specify 'all' and it will e
 python3 domainExtractor.py -f test.html --target all
 
 # pull from yahoo.com home page, extract all domains. No target specified defaults to 'all'
-python3 domainExtractor.py -u https://yahoo.com
+python3 domainExtractor.py -u "https://yahoo.com"
 ```
 
 ![image](https://user-images.githubusercontent.com/24526564/85906901-c50f6f80-b7dd-11ea-8fea-e7adad964d97.png)
@@ -81,18 +81,14 @@ python3 domainExtractor.py -u https://yahoo.com
 If you run the script again while checking for the same target, a few things occur: 
 <br>1) if you already have a final file for it it will notify you of domains you didnt have before
 <br>2) It will append them to the final file
-<br>3) It will also create a new file with the date and log them in there with the time.
+<br>3) It will log the new domain to logs/newdomains.{target}.txt with date & time found
 
 <br>This allows you to check the same target across multiple files and be notified of any new domains found!
 
-<h3>Example: extracting from Amass and Assetfinder output files</h3>
+I first use it against my Amass results, then against my Subfinder results. 
+<br>The script will sort and dedup as well as notify me of how many new, unique domains came from subfinder's results.
 
-![image](https://user-images.githubusercontent.com/24526564/85907726-7f07db00-b7e0-11ea-820f-8912d779c065.png)
-
-I first use it against my Amass results, then against my Assetfinder results. 
-<br>The script will sort and dedup as well as notify me of how many new, unique domains came from assetfinder's results.
-
-![image](https://user-images.githubusercontent.com/24526564/85907913-27b63a80-b7e1-11ea-8d8b-c887a19d61ca.png)
+![image](https://user-images.githubusercontent.com/24526564/86151778-2e88ca00-bacd-11ea-98ff-e5de1c2edda9.png)
 
 It will add them to the final file and log just the new ones to logs/newdomains.{target}.txt
 
