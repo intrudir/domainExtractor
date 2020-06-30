@@ -30,7 +30,7 @@ optional arguments:
 Specify your source and a target domain to search for and extract. 
 
 <h3>Extracting from a file</h3>
-In the example below, I am using the source code of the yahoo.com home page and I am extracting all domains with yahoo.com as the TLD.
+Using any file with text in it, extracting all domains with yahoo.com as the TLD.
 
 ```bash
 python3 domainExtractor.py --file test.html --target yahoo.com
@@ -44,7 +44,7 @@ It will extract, sort and dedup all domains that are found.
 ![image](https://user-images.githubusercontent.com/24526564/85906625-dd32bf00-b7dc-11ea-9c22-415c76c01ae4.png)
 
 <h3> Extracting from a web page </h3>
-In the example below I am pulling data directly from Yahoo.com's homepage.
+Pulling data directly from Yahoo.com's homepage extracting all domains with 'yahoo.com' as the TLD.
 
 ```bash
 python3 domainExtractor.py -u https://yahoo.com --target yahoo.com
@@ -54,7 +54,7 @@ python3 domainExtractor.py -u https://yahoo.com --target yahoo.com
 
 
 <h2> Specifying all domains </h2>
-Specifying 'all' as the target extracts all domains it finds (at the moment .com, .net, .org, .tv, .io)
+You can either omit the --target flag completely, or specify 'all' and it will extract all domains it finds (at the moment .com, .net, .org, .tv, .io)
 
 ```bash
 python3 domainExtractor.py --file test.html --target all
