@@ -1,5 +1,5 @@
 # domainExtractor
-Best effort attempt to extract all possible domains and subdomains / FQDNs from a specified file
+Extract domains/subdomains/FQDNs from files and URLs 
 
 <h1>Installation:</h1>
 
