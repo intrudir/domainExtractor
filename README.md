@@ -33,7 +33,7 @@ Specify your source and a target domain to search for and extract.
 Using any file with text in it, extracting all domains with yahoo.com as the TLD.
 
 ```bash
-python3 domainExtractor.py --file test.html --target yahoo.com
+python3 domainExtractor.py -f test.html -t yahoo.com
 ```
 It will extract, sort and dedup all domains that are found.
 
@@ -47,7 +47,7 @@ It will extract, sort and dedup all domains that are found.
 Pulling data directly from Yahoo.com's homepage extracting all domains with 'yahoo.com' as the TLD.
 
 ```bash
-python3 domainExtractor.py -u https://yahoo.com --target yahoo.com
+python3 domainExtractor.py -u https://yahoo.com -t yahoo.com
 ```
 
 ![image](https://user-images.githubusercontent.com/24526564/86146580-68a29d80-bac6-11ea-8457-7d73b2a6d1c4.png)
@@ -57,7 +57,11 @@ python3 domainExtractor.py -u https://yahoo.com --target yahoo.com
 You can either omit the --target flag completely, or specify 'all' and it will extract all domains it finds (at the moment .com, .net, .org, .tv, .io)
 
 ```bash
-python3 domainExtractor.py --file test.html --target all
+# pulling form a file, extract all domains
+python3 domainExtractor.py -f test.html --target all
+
+# pull from yahoo.com home page, extract all domains. No target specified defaults to 'all'
+python3 domainExtractor.py -u https://yahoo.com
 ```
 
 ![image](https://user-images.githubusercontent.com/24526564/85906901-c50f6f80-b7dd-11ea-8fea-e7adad964d97.png)
@@ -83,7 +87,7 @@ I first use it against my Amass results, then against my Assetfinder results.
 
 ![image](https://user-images.githubusercontent.com/24526564/85907913-27b63a80-b7e1-11ea-8d8b-c887a19d61ca.png)
 
-It will add them to the final file as well as log just the new ones to a file with the date and time.
+It will add them to the final file and log just the new ones to logs/newdomains.{target}.txt
 
 ![image](https://user-images.githubusercontent.com/24526564/85908016-706df380-b7e1-11ea-8986-fe96181c6b6d.png)
 
