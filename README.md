@@ -33,15 +33,15 @@ Specify your source and a target domain to search for and extract.
 Using any file with text in it, extracting all domains with yahoo.com as the TLD.
 
 ```bash
-python3 domainExtractor.py -f test.html -t yahoo.com
+python3 domainExtractor.py -f ~/Desktop/yahoo/test/test.html -t yahoo.com
 ```
 It will extract, sort and dedup all domains that are found.
 
-![image](https://user-images.githubusercontent.com/24526564/85906292-dd7e8a80-b7db-11ea-84b2-dbb7df9bec74.png)
+![image](https://user-images.githubusercontent.com/24526564/86149887-97227780-baca-11ea-9611-9788db6d3c6c.png)
 
 <h5>Example output:</h5>
 
-![image](https://user-images.githubusercontent.com/24526564/85906625-dd32bf00-b7dc-11ea-9c22-415c76c01ae4.png)
+![image](https://user-images.githubusercontent.com/24526564/86149975-bf11db00-baca-11ea-86be-a963a7992e2e.png)
 
 <h3> Extracting from a web page </h3>
 Pulling data directly from Yahoo.com's homepage extracting all domains with 'yahoo.com' as the TLD.
