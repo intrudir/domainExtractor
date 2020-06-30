@@ -29,7 +29,7 @@ optional arguments:
 <h2> Matching a specified target domain </h2>
 Specify your source and a target domain to search for and extract. 
 
-<h3>Extracting from a file</h3>
+<h3>Extracting from files</h3>
 Using any file with text in it, extracting all domains with yahoo.com as the TLD.
 
 ```bash
@@ -39,6 +39,13 @@ It will extract, sort and dedup all domains that are found.
 
 ![image](https://user-images.githubusercontent.com/24526564/86149887-97227780-baca-11ea-9611-9788db6d3c6c.png)
 
+You can specify multiple files using commas (no spaces)
+```bash
+python3 domainExtractor.py -f amass.playstation.net.txt,subfinder.playstation.net.txt --target playstation.net
+```
+
+![image](https://user-images.githubusercontent.com/24526564/86150984-22503d00-bacc-11ea-85a1-49bfd71b6709.png)
+
 <h5>Example output:</h5>
 
 ![image](https://user-images.githubusercontent.com/24526564/86149975-bf11db00-baca-11ea-86be-a963a7992e2e.png)
@@ -47,7 +54,7 @@ It will extract, sort and dedup all domains that are found.
 Pulling data directly from Yahoo.com's homepage extracting all domains with 'yahoo.com' as the TLD.
 
 ```bash
-python3 domainExtractor.py -u https://yahoo.com -t yahoo.com
+python3 domainExtractor.py -u "https://yahoo.com" -t yahoo.com
 ```
 
 ![image](https://user-images.githubusercontent.com/24526564/86146580-68a29d80-bac6-11ea-8457-7d73b2a6d1c4.png)
@@ -57,7 +64,7 @@ python3 domainExtractor.py -u https://yahoo.com -t yahoo.com
 You can either omit the --target flag completely, or specify 'all' and it will extract all domains it finds (at the moment .com, .net, .org, .tv, .io)
 
 ```bash
-# pulling form a file, extract all domains
+# pulling from a file, extract all domains
 python3 domainExtractor.py -f test.html --target all
 
 # pull from yahoo.com home page, extract all domains. No target specified defaults to 'all'
