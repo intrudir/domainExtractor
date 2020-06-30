@@ -92,6 +92,6 @@ I first use it against my Amass results, then against my Subfinder results.
 
 It will add them to the final file and log just the new ones to logs/newdomains.{target}.txt
 
-![image](https://user-images.githubusercontent.com/24526564/85908016-706df380-b7e1-11ea-8986-fe96181c6b6d.png)
+![image](https://user-images.githubusercontent.com/24526564/86151943-6e4fb180-bacd-11ea-930c-b4844efc2bf4.png)
 
 
